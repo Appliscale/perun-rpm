@@ -1,0 +1,38 @@
+%define debug_package %{nil}
+Name:           perun-linux-amd64
+Version:        1.2.0
+Release:        1
+Summary:        A Swiss army knife for AWS CloudFormation templates
+
+License:        ASL 2.0
+URL:            http://perun-for-aws.appliscale.io/
+Source0:        https://github.com/Appliscale/perun/releases/download/%{version}/%{name}.tar.gz
+
+%description
+Perun was created to support work with CloudFormation templates.
+CloudFormation works in a way that it runs template online in AWS
+infrastructure and fails after first error - in many cases it is
+related with particular name length (e.g. maximum length is 64
+characters). Instead of doing a round-trip, we would like
+to detect such cases locally.
+
+%prep
+%setup -q -c
+%build
+%install LDFLAGS+=--build-id
+install -m 0755 -d $RPM_BUILD_ROOT/%{name}
+install -m 0755 %{name} $RPM_BUILD_ROOT/%{name}/%{name}
+install -m 0755 main.yaml $RPM_BUILD_ROOT/%{name}/main.yaml
+
+%post
+mkdir %{_homeconfig}/%{name}
+cp $RPM_BUILD_ROOT/%{name}/main.yaml %{_homeconfig}/%{name}/
+
+%files  
+%doc LICENSE
+//%{name}/%{name}
+//%{name}/main.yaml
+
+%changelog
+* Thu Jun  7 2018 Sylwia Gargula sylwia.gargula@npspace.pl 1.2.0-1
+-Initial package
