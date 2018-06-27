@@ -23,15 +23,17 @@ to detect such cases locally.
 install -m 0755 -d $RPM_BUILD_ROOT/%{name}
 install -m 0755 %{name} $RPM_BUILD_ROOT/%{name}/%{name}
 install -m 0644 main.yaml $RPM_BUILD_ROOT/%{name}/main.yaml
+install -m 0644 LICENSE $RPM_BUILD_ROOT/%{name}/LICENSE
 
 %post
 mkdir -m 777 %{getenv:HOME}/.config/perun
 cp $RPM_BUILD_ROOT/%{name}/main.yaml %{getenv:HOME}/.config/perun/
 
 %files  
-%doc LICENSE
+%license //%{name}/LICENSE
 //%{name}/%{name}
 //%{name}/main.yaml
+%doc
 
 %changelog
 * Thu Jun  7 2018 Sylwia Gargula sylwia.gargula@npspace.pl 1.2.0-1
