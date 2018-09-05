@@ -1,12 +1,12 @@
 %define debug_package %{nil}
 Name:           perun-linux-amd64
-Version:        1.2.0
+Version:        latest
 Release:        1
 Summary:        A Swiss army knife for AWS CloudFormation templates
 
 License:        ASL 2.0
 URL:            http://perun-for-aws.appliscale.io/
-Source0:        https://github.com/Appliscale/perun/releases/download/%{version}/%{name}.tar.gz
+Source0:        %{version}/%{name}.tar.gz
 
 %description
 Perun was created to support work with CloudFormation templates.
@@ -30,5 +30,5 @@ install -m 0644 LICENSE $RPM_BUILD_ROOT/%{name}/LICENSE
 %doc
 
 %changelog
-* Thu Jun  7 2018 Sylwia Gargula sylwia.gargula@npspace.pl 1.2.0-1
+* Thu Jun  7 2018 Sylwia Gargula sylwia.gargula@npspace.pl latest
 -Initial package
